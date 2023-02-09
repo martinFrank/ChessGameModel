@@ -1,4 +1,4 @@
-package com.github.martinfrank.games.chessserver.server.message;
+package com.github.martinfrank.games.chessmodel.message;
 
 public class FsWelcomeMessage extends Message{
 

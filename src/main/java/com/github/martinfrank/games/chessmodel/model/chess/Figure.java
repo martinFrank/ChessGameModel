@@ -1,6 +1,5 @@
-package com.github.martinfrank.games.chessserver.server.model.chess;
+package com.github.martinfrank.games.chessmodel.model.chess;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

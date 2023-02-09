@@ -1,8 +1,8 @@
-package com.github.martinfrank.games.chessserver.server.message;
+package com.github.martinfrank.games.chessmodel.message;
 
-import com.github.martinfrank.games.chessserver.server.model.Game;
-import com.github.martinfrank.games.chessserver.server.model.chess.Field;
-import com.github.martinfrank.games.chessserver.server.model.chess.Figure;
+import com.github.martinfrank.games.chessmodel.model.Game;
+import com.github.martinfrank.games.chessmodel.model.chess.Field;
+import com.github.martinfrank.games.chessmodel.model.chess.Figure;
 
 import java.util.List;
 

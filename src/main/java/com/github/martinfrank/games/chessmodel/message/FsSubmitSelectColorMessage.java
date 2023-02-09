@@ -1,6 +1,6 @@
-package com.github.martinfrank.games.chessserver.server.message;
+package com.github.martinfrank.games.chessmodel.message;
 
-import com.github.martinfrank.games.chessserver.server.model.Game;
+import com.github.martinfrank.games.chessmodel.model.Game;
 
 public class FsSubmitSelectColorMessage extends Message{
 

@@ -1,7 +1,6 @@
-package com.github.martinfrank.games.chessserver.server.message;
+package com.github.martinfrank.games.chessmodel.message;
 
-import com.github.martinfrank.games.chessserver.server.model.Player;
-import com.github.martinfrank.games.chessserver.server.model.chess.Color;
+import com.github.martinfrank.games.chessmodel.model.Player;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package com.github.martinfrank.games.chessserver.server.model;
+package com.github.martinfrank.games.chessmodel.model;
 
 import java.util.Objects;
 import java.util.UUID;
