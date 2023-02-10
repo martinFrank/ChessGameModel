@@ -15,55 +15,35 @@ public class MessageParser {
         Message message;
         try {
             message = gson.fromJson(jsonStr, Message.class);
-            switch (message.msgType){
-                case FC_LOGIN: return createFcLoginMessage(jsonStr);
-                case FC_GET_PARTICIPATING_GAMES: return createFcGetParticipatingGamesMessage(jsonStr);
-                case FC_GET_OPEN_GAMES: return createFcGetOpenGamesMessage(jsonStr);
-                case FC_CREATE_GAME: return createFcCreateGameMessage(jsonStr);
-                case FC_SELECT_COLOR: return createFcSelectColorMessage(jsonStr);
-                case FC_START_GAME: return createFcStartGameMessage(jsonStr);
-                case FC_SELECT_FIGURE: return createFcSelectFigureMessage(jsonStr);
+            switch (message.msgType) {
+                case FC_LOGIN: return gson.fromJson(jsonStr, FcLoginMessage.class);
+                case FC_GET_PARTICIPATING_GAMES: return gson.fromJson(jsonStr, FcGetParticipatingGamesMessage.class);
+                case FC_GET_OPEN_GAMES: return gson.fromJson(jsonStr, FcGetOpenGamesMessage.class);
+                case FC_CREATE_GAME: return gson.fromJson(jsonStr, FcCreateGameMessage.class);
+                case FC_SELECT_COLOR: return gson.fromJson(jsonStr, FcSelectColorMessage.class);
+                case FC_START_GAME: return gson.fromJson(jsonStr, FcStartGameMessage.class);
+                case FC_SELECT_FIGURE: return gson.fromJson(jsonStr, FcSelectFigureMessage.class);
 
+                case FS_DECLINE_CREATE_GAME: return gson.fromJson(jsonStr, FsDeclineCreateGameMessage.class);
+                case FS_DECLINE_PARTICIPATING_GAMES: return gson.fromJson(jsonStr, FsDeclineParticipatingGamesMessage.class);
+                case FS_SUBMIT_CREATED_GAME: return gson.fromJson(jsonStr, FsSubmitCreatedGameMessage.class);
+                case FS_SUBMIT_OPEN_GAMES: return gson.fromJson(jsonStr, FsSubmitOpenGamesMessage.class);
+                case FS_SUBMIT_SELECT_COLOR: return gson.fromJson(jsonStr, FsSubmitSelectColorMessage.class);
+                case FS_SUBMIT_SELECT_FIGURE: return gson.fromJson(jsonStr, FsSubmitSelectFigureMessage.class);
+                case FS_SUBMIT_PARTICIPATING_GAMES: return gson.fromJson(jsonStr, FsSubmitParticipatingGamesMessage.class);
+                case FS_SUBMIT_UPDATE_GAME: return gson.fromJson(jsonStr, FsSubmitUpdateGameMessage.class);
             }
-        }catch (JsonParseException e){
+        } catch (JsonParseException e) {
             message = new Message(MessageType.UNKNOWN);
-            LOGGER.debug("Exception: "+e);
+            LOGGER.debug("Exception: " + e);
         }
         return message;
     }
 
-    private FcSelectFigureMessage createFcSelectFigureMessage(String jsonStr) {
-        return gson.fromJson(jsonStr, FcSelectFigureMessage.class);
-    }
-
-    private FcGetOpenGamesMessage createFcGetOpenGamesMessage(String jsonStr) {
-        return gson.fromJson(jsonStr, FcGetOpenGamesMessage.class);
-    }
-
-    private FcStartGameMessage createFcStartGameMessage(String jsonStr) {
-        return gson.fromJson(jsonStr, FcStartGameMessage.class);
-    }
-
-    private FcSelectColorMessage createFcSelectColorMessage(String jsonStr) {
-        return gson.fromJson(jsonStr, FcSelectColorMessage.class);
-    }
-
-    private FcCreateGameMessage createFcCreateGameMessage(String jsonStr) {
-        return gson.fromJson(jsonStr, FcCreateGameMessage.class);
-    }
-
-    private FcLoginMessage createFcLoginMessage(String jsonStr) {
-        return gson.fromJson(jsonStr, FcLoginMessage.class);
-    }
-
-    private FcGetParticipatingGamesMessage createFcGetParticipatingGamesMessage(String jsonStr) {
-        return gson.fromJson(jsonStr, FcGetParticipatingGamesMessage.class);
-    }
-
     public String toJson(Message message) {
-        try{
+        try {
             return gson.toJson(message);
-        }catch (JsonParseException e){
+        } catch (JsonParseException e) {
             return gson.toJson(message);
         }
     }

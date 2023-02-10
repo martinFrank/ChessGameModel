@@ -43,4 +43,6 @@ public class FcGetParticipatingGamesMessageTest {
         Assert.assertEquals(TEST_ID, fcGetParticipatingGamesMessage.player.playerId);
         Assert.assertEquals(2, fcGetParticipatingGamesMessage.version);
     }
+
+
 }

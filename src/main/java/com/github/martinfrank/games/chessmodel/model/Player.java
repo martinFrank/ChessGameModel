@@ -25,4 +25,12 @@ public class Player {
     public int hashCode() {
         return Objects.hash(playerId);
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId=" + playerId +
+                ", playerName='" + playerName + '\'' +
+                '}';
+    }
 }

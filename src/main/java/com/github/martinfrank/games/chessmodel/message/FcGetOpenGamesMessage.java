@@ -13,6 +13,7 @@ public class FcGetOpenGamesMessage extends Message{
     @Override
     public String toString() {
         return "FcGetOpenGamesMessage{" +
+                "player="+player+
                 ", msgType=" + msgType +
                 ", version=" + version +
                 '}';

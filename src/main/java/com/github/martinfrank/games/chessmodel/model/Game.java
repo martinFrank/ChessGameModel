@@ -4,12 +4,13 @@ package com.github.martinfrank.games.chessmodel.model;
 import com.github.martinfrank.games.chessmodel.model.chess.Board;
 import com.github.martinfrank.games.chessmodel.model.chess.Color;
 
+import java.util.Objects;
 import java.util.UUID;
 
 //laufendes Spiel
 public class Game {
 
-    public final UUID gameId = UUID.randomUUID();
+    public final UUID gameId;
     public final Player hostPlayer;
     private Player guestPlayer;
     private Player currentPlayer;
@@ -25,7 +26,8 @@ public class Game {
     public Board board;
     //private List<Move> moveHistory;
 
-    public Game(Player hostPlayer) {
+    public Game(UUID gameId, Player hostPlayer) {
+        this.gameId = gameId;
         this.hostPlayer = hostPlayer;
         isHostOnline = true;
     }
@@ -71,4 +73,33 @@ public class Game {
         guestColor = desiredColor.getOpposite();
     }
 
+    @Override
+    public String toString() {
+        return "Game{" +
+                "gameId=" + gameId +
+                ", hostPlayer=" + hostPlayer +
+                ", guestPlayer=" + guestPlayer +
+                ", currentPlayer=" + currentPlayer +
+                ", hostColor=" + hostColor +
+                ", guestColor=" + guestColor +
+                ", isStarted=" + isStarted +
+                ", isHostOnline=" + isHostOnline +
+                ", isGuestOnline=" + isGuestOnline +
+                ", startTime=" + startTime +
+                ", board=" + board +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return isStarted == game.isStarted && isHostOnline == game.isHostOnline && isGuestOnline == game.isGuestOnline && startTime == game.startTime && gameId.equals(game.gameId) && hostPlayer.equals(game.hostPlayer) && Objects.equals(guestPlayer, game.guestPlayer) && Objects.equals(currentPlayer, game.currentPlayer) && hostColor == game.hostColor && guestColor == game.guestColor && Objects.equals(board, game.board);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(gameId, hostPlayer, guestPlayer, currentPlayer, hostColor, guestColor, isStarted, isHostOnline, isGuestOnline, startTime, board);
+    }
 }
