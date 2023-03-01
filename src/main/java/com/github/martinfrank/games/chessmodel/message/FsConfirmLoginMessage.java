@@ -1,6 +1,6 @@
 package com.github.martinfrank.games.chessmodel.message;
 
-public class FsConfirmLoginMessage extends Message{
+public class FsConfirmLoginMessage extends Message {
 
     public final String loginConfirmationMessage = "login confirmed";
 

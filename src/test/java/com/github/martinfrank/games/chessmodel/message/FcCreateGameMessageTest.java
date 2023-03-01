@@ -32,7 +32,7 @@ public class FcCreateGameMessageTest {
         MessageParser messageParser = new MessageParser();
 
         //when
-        game.setHostOnline(true);
+        game.gameContent.setHostOnline(true);
         String jsonString = messageParser.toJson(message);
         System.out.println(jsonString);
     }

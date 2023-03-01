@@ -2,24 +2,23 @@ package com.github.martinfrank.games.chessmodel.model.chess;
 
 public class Field {
 
-    public final String row;
-    public final String column;
+    public String row;
+    public String column;
 
     transient int x;
     transient int y;
 
+
     public Field(String row, String column) {
         this.row = row;
         this.column = column;
-        this.x = x;
-        this.y = y;
     }
 
     Field(int x, int y) {
+        this.row = mapToRow(x);
+        this.column = mapToColumn((char)y);
         this.x = x;
         this.y = y;
-        this.row = getRow(x);
-        this.column = getColumn((char)y);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class Field {
     }
 
 
-    private String getColumn(int column) {
+    public static String mapToColumn(int column) {
         switch (column){
             case 0: return "A";
             case 1: return "B";
@@ -45,7 +44,9 @@ public class Field {
         return "?";
     }
 
-    private String getRow(int row) {
+    public static String mapToRow(int row) {
         return ""+(8 - row);
     }
+
+
 }

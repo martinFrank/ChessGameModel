@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Board {
 
-    private transient final Fields fields = new Fields();
+    private transient Fields fields = new Fields();
     public final Map<Field, Figure> lineUp = new HashMap<>();
     public final List<Figure> beatenFigures = new ArrayList<>();
 
@@ -56,6 +56,15 @@ public class Board {
     }
 
 
+    public Field findField(int x, int y){
+        String column = Field.mapToColumn(x);
+        String row = Field.mapToRow(y);
+        return findField(row, column);
+    }
+
+    public Field findField(String row, String column){
+        return fields.getField(row.charAt(0), Integer.parseInt(column));
+    }
     public Figure findFigure(Field field) {
         return lineUp.get(field);
     }
@@ -63,5 +72,14 @@ public class Board {
     public List<Field> getPath(Field field) {
         //FIXME
         return Collections.emptyList();
+    }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+//                "fields=" + fields +
+                ", lineUp=" + lineUp +
+                ", beatenFigures=" + beatenFigures +
+                '}';
     }
 }

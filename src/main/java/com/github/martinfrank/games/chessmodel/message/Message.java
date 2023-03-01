@@ -4,6 +4,9 @@ public class Message {
     public final MessageType msgType;
     public int version = 1;
 
+    //order:
+    //1) PLAYER
+    //2) GAME
     public Message (MessageType msgType ){
         this.msgType = msgType;
     }
