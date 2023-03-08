@@ -60,6 +60,30 @@ public class GameContent {
         guestColor = desiredColor.getOpposite();
     }
 
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public Color getHostColor() {
+        return hostColor;
+    }
+
+    public Color getGuestColor() {
+        return guestColor;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public void setGuestColor(Color guestColor) {
+        this.guestColor = guestColor;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
     @Override
     public String toString() {
         return "GameContent{" +
