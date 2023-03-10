@@ -1,9 +1,11 @@
-package com.github.martinfrank.games.chessmodel.message;
+package com.github.martinfrank.games.chessmodel.message.joingame;
 
+import com.github.martinfrank.games.chessmodel.message.Message;
+import com.github.martinfrank.games.chessmodel.message.MessageType;
 import com.github.martinfrank.games.chessmodel.model.Game;
 import com.github.martinfrank.games.chessmodel.model.Player;
 
-public class FsConfirmJoinGamesMessage extends Message{
+public class FsConfirmJoinGamesMessage extends Message {
 
     public final Player player;
     public Game game;

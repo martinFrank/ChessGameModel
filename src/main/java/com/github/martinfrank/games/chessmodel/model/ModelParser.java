@@ -1,6 +1,5 @@
 package com.github.martinfrank.games.chessmodel.model;
 
-import com.github.martinfrank.games.chessmodel.message.FcStartGameMessage;
 import com.github.martinfrank.games.chessmodel.message.MessageParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

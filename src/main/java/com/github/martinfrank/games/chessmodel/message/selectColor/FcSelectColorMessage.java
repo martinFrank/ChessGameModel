@@ -1,11 +1,13 @@
-package com.github.martinfrank.games.chessmodel.message;
+package com.github.martinfrank.games.chessmodel.message.selectColor;
 
+import com.github.martinfrank.games.chessmodel.message.Message;
+import com.github.martinfrank.games.chessmodel.message.MessageType;
 import com.github.martinfrank.games.chessmodel.model.Player;
 import com.github.martinfrank.games.chessmodel.model.chess.Color;
 
 import java.util.UUID;
 
-public class FcSelectColorMessage extends Message{
+public class FcSelectColorMessage extends Message {
 
     public final Player player;
     public final Color desiredColor;

@@ -1,10 +1,12 @@
-package com.github.martinfrank.games.chessmodel.message;
+package com.github.martinfrank.games.chessmodel.message.getopengames;
 
+import com.github.martinfrank.games.chessmodel.message.Message;
+import com.github.martinfrank.games.chessmodel.message.MessageType;
 import com.github.martinfrank.games.chessmodel.model.Game;
 
 import java.util.List;
 
-public class FsSubmitOpenGamesMessage extends Message{
+public class FsSubmitOpenGamesMessage extends Message {
 
     public final List<Game> games;
 

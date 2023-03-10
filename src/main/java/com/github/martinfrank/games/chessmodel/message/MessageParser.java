@@ -1,5 +1,28 @@
 package com.github.martinfrank.games.chessmodel.message;
 
+import com.github.martinfrank.games.chessmodel.message.creategame.FcCreateGameMessage;
+import com.github.martinfrank.games.chessmodel.message.getgamecontent.FcGetGameContentMessage;
+import com.github.martinfrank.games.chessmodel.message.getgamecontent.FsDeclineGameContentMessage;
+import com.github.martinfrank.games.chessmodel.message.getgamecontent.FsSubmitGameContentMessage;
+import com.github.martinfrank.games.chessmodel.message.getopengames.FcGetOpenGamesMessage;
+import com.github.martinfrank.games.chessmodel.message.getopengames.FsSubmitOpenGamesMessage;
+import com.github.martinfrank.games.chessmodel.message.getparticipatinggames.FcGetParticipatingGamesMessage;
+import com.github.martinfrank.games.chessmodel.message.getparticipatinggames.FsDeclineParticipatingGamesMessage;
+import com.github.martinfrank.games.chessmodel.message.getparticipatinggames.FsSubmitParticipatingGamesMessage;
+import com.github.martinfrank.games.chessmodel.message.login.FcLoginMessage;
+import com.github.martinfrank.games.chessmodel.message.login.FsSubmitLoginMessage;
+import com.github.martinfrank.games.chessmodel.message.selectfield.FcSelectFieldMessage;
+import com.github.martinfrank.games.chessmodel.message.selectfield.FsDeclineSelectFieldMessage;
+import com.github.martinfrank.games.chessmodel.message.selectfield.FsSubmitSelectFieldMessage;
+import com.github.martinfrank.games.chessmodel.message.startgame.FcStartGameMessage;
+import com.github.martinfrank.games.chessmodel.message.creategame.FsDeclineCreateGameMessage;
+import com.github.martinfrank.games.chessmodel.message.creategame.FsSubmitCreatedGameMessage;
+import com.github.martinfrank.games.chessmodel.message.joingame.FcJoinGameMessage;
+import com.github.martinfrank.games.chessmodel.message.joingame.FsConfirmJoinGamesMessage;
+import com.github.martinfrank.games.chessmodel.message.joingame.FsDeclineJoinGameMessage;
+import com.github.martinfrank.games.chessmodel.message.selectColor.FcSelectColorMessage;
+import com.github.martinfrank.games.chessmodel.message.selectColor.FsDeclineSelectColorMessage;
+import com.github.martinfrank.games.chessmodel.message.selectColor.FsSubmitSelectColorMessage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
@@ -22,7 +45,7 @@ public class MessageParser {
             message = gson.fromJson(jsonStr, Message.class);
             switch (message.msgType) {
                 case FC_LOGIN: return gson.fromJson(jsonStr, FcLoginMessage.class);
-                case FS_CONFIRM_LOGIN: return gson.fromJson(jsonStr, FsConfirmLoginMessage.class);
+                case FS_SUBMIT_LOGIN: return gson.fromJson(jsonStr, FsSubmitLoginMessage.class);
                 //FIXME decline?
 
                 case FC_GET_PARTICIPATING_GAMES: return gson.fromJson(jsonStr, FcGetParticipatingGamesMessage.class);
@@ -41,9 +64,9 @@ public class MessageParser {
                 case FS_SUBMIT_SELECT_COLOR: return gson.fromJson(jsonStr, FsSubmitSelectColorMessage.class);
                 case FS_DECLINE_SELECT_COLOR: return gson.fromJson(jsonStr, FsDeclineSelectColorMessage.class);
 
-                case FC_SELECT_FIGURE: return gson.fromJson(jsonStr, FcSelectFigureMessage.class);
-                case FS_SUBMIT_SELECT_FIGURE: return gson.fromJson(jsonStr, FsSubmitSelectFigureMessage.class);
-                case FS_DECLINE_SELECT_FIGURE: return gson.fromJson(jsonStr, FsDeclineSelectFigureMessage.class);
+                case FC_SELECT_FIELD: return gson.fromJson(jsonStr, FcSelectFieldMessage.class);
+                case FS_SUBMIT_SELECT_FIELD: return gson.fromJson(jsonStr, FsSubmitSelectFieldMessage.class);
+                case FS_DECLINE_SELECT_FIELD: return gson.fromJson(jsonStr, FsDeclineSelectFieldMessage.class);
 
                 case FC_JOIN_GAME: return gson.fromJson(jsonStr, FcJoinGameMessage.class);
                 case FS_CONFIRM_JOIN_GAME: return gson.fromJson(jsonStr, FsConfirmJoinGamesMessage.class);

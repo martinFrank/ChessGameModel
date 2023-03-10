@@ -2,6 +2,7 @@ package com.github.martinfrank.games.chessmodel.model;
 
 import com.github.martinfrank.games.chessmodel.model.chess.Board;
 import com.github.martinfrank.games.chessmodel.model.chess.Color;
+import com.github.martinfrank.games.chessmodel.model.chess.Field;
 
 public class GameContent {
 
@@ -13,6 +14,10 @@ public class GameContent {
     private Color guestColor = Color.BLACK;
     private boolean isHostOnline;
     private boolean isGuestOnline;
+
+    private Field hostSelection;
+
+    private Field guestSelection;
 
     private long startTime = -1;
 
@@ -84,6 +89,38 @@ public class GameContent {
         this.startTime = startTime;
     }
 
+    public Field getHostSelection() {
+        return hostSelection;
+    }
+
+    public void setHostSelection(Field hostSelection) {
+        this.hostSelection = hostSelection;
+    }
+
+    public Field getGuestSelection() {
+        return guestSelection;
+    }
+
+    public void setGuestSelection(Field guestSelection) {
+        this.guestSelection = guestSelection;
+    }
+
+    public void selectHostField(Field field) {
+        if(hostSelection != null && hostSelection.equals(field)){
+            hostSelection = null;
+            return;
+        }
+        hostSelection = field;
+    }
+
+    public void selectGuestField(Field field) {
+        if(guestSelection != null && guestSelection.equals(field)){
+            guestSelection = null;
+            return;
+        }
+        guestSelection = field;
+    }
+
     @Override
     public String toString() {
         return "GameContent{" +
@@ -98,4 +135,7 @@ public class GameContent {
                 ", container=" + container +
                 '}';
     }
+
+
+
 }

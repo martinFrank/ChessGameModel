@@ -1,5 +1,6 @@
 package com.github.martinfrank.games.chessmodel.message;
 
+import com.github.martinfrank.games.chessmodel.message.getgamecontent.FsSubmitGameContentMessage;
 import com.github.martinfrank.games.chessmodel.model.Game;
 import com.github.martinfrank.games.chessmodel.model.GameContent;
 import com.github.martinfrank.games.chessmodel.model.Player;
@@ -43,7 +44,7 @@ public class GameContentMessageTest {
     @Test
     public void doIt2(){
         //given
-        GameContent gameContent = new GameContent(new Game(UUID.fromString("7ea85e6a-7380-4247-b08c-e3898c7b6a41"), new Player(UUID.fromString("7ea85e6a-7380-4247-b08c-e3898c7b6a42"), "testeee")));
+        GameContent gameContent = new GameContent(new Game(UUID.fromString("7ea85e6a-7380-4247-b08c-e3898c7b6a41"), new Player(UUID.fromString("7ea85e6a-7380-4247-b08c-e3898c7b6a42"), "testeee", 0)));
         FsSubmitGameContentMessage message = new FsSubmitGameContentMessage(gameContent);
         System.out.println("message: "+message);
 

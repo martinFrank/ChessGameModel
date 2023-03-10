@@ -7,10 +7,12 @@ public class Player {
 
     public final UUID playerId;
     public final String playerName;
+    public final int color;
 
-    public Player(UUID playerId, String playerName ){
+    public Player(UUID playerId, String playerName, int color){
         this.playerId = playerId;
         this.playerName = playerName;
+        this.color = color;
     }
 
     @Override
@@ -32,5 +34,9 @@ public class Player {
                 "playerId=" + playerId +
                 ", playerName='" + playerName + '\'' +
                 '}';
+    }
+
+    public boolean hasId(UUID playerId) {
+        return this.playerId.equals(playerId);
     }
 }

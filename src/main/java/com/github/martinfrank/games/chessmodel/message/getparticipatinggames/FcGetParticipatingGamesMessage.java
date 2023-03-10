@@ -1,8 +1,10 @@
-package com.github.martinfrank.games.chessmodel.message;
+package com.github.martinfrank.games.chessmodel.message.getparticipatinggames;
 
+import com.github.martinfrank.games.chessmodel.message.Message;
+import com.github.martinfrank.games.chessmodel.message.MessageType;
 import com.github.martinfrank.games.chessmodel.model.Player;
 
-public class FcGetParticipatingGamesMessage extends Message{
+public class FcGetParticipatingGamesMessage extends Message {
 
     public final Player player;
 

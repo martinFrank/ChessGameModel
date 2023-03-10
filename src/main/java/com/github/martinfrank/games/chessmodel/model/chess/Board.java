@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Board {
 
-    private transient Fields fields = new Fields();
+    private final transient Fields fields = new Fields();
     public final Map<Field, Figure> lineUp = new HashMap<>();
     public final List<Figure> beatenFigures = new ArrayList<>();
 
@@ -69,10 +69,6 @@ public class Board {
         return lineUp.get(field);
     }
 
-    public List<Field> getPath(Field field) {
-        //FIXME
-        return Collections.emptyList();
-    }
 
     @Override
     public String toString() {

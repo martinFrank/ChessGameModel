@@ -1,11 +1,14 @@
-package com.github.martinfrank.games.chessmodel.message;
+package com.github.martinfrank.games.chessmodel.message.login;
 
-public class FsConfirmLoginMessage extends Message {
+import com.github.martinfrank.games.chessmodel.message.Message;
+import com.github.martinfrank.games.chessmodel.message.MessageType;
+
+public class FsSubmitLoginMessage extends Message {
 
     public final String loginConfirmationMessage = "login confirmed";
 
-    public FsConfirmLoginMessage() {
-        super(MessageType.FS_CONFIRM_LOGIN);
+    public FsSubmitLoginMessage() {
+        super(MessageType.FS_SUBMIT_LOGIN);
     }
 
     @Override

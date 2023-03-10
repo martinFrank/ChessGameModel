@@ -1,11 +1,13 @@
-package com.github.martinfrank.games.chessmodel.message;
+package com.github.martinfrank.games.chessmodel.message.getgamecontent;
 
+import com.github.martinfrank.games.chessmodel.message.Message;
+import com.github.martinfrank.games.chessmodel.message.MessageType;
 import com.github.martinfrank.games.chessmodel.model.Game;
 import com.github.martinfrank.games.chessmodel.model.Player;
 
 import java.util.UUID;
 
-public class FcGetGameContentMessage extends Message{
+public class FcGetGameContentMessage extends Message {
 
     public final Player player;
     public final Game game;

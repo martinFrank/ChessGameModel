@@ -1,8 +1,10 @@
-package com.github.martinfrank.games.chessmodel.message;
+package com.github.martinfrank.games.chessmodel.message.selectColor;
 
+import com.github.martinfrank.games.chessmodel.message.Message;
+import com.github.martinfrank.games.chessmodel.message.MessageType;
 import com.github.martinfrank.games.chessmodel.model.Game;
 
-public class FsSubmitSelectColorMessage extends Message{
+public class FsSubmitSelectColorMessage extends Message {
 
     public final Game game;
     public String changes;
