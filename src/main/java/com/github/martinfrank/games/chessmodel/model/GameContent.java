@@ -23,7 +23,7 @@ public class GameContent {
 
     public Board board;
 
-    public transient final Game container;
+    private transient final Game container;
 
     public GameContent (Game container){
         this.container = container; //string coupling
@@ -52,9 +52,9 @@ public class GameContent {
         return isStarted;
     }
 
-    public void setStarted(boolean started) {
-        isStarted = started;
-        currentPlayer = container.hostPlayer;
+    public void startGame() {
+        isStarted = true;
+        currentPlayer = hostColor == Color.WHITE? container.hostPlayer : container.getGuestPlayer();
         board = new Board();
         startTime = System.currentTimeMillis();
     }

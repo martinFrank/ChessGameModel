@@ -20,8 +20,8 @@ public class Fields {
         return fields[r][c];
     }
 
-    private int getColumn(char column) {
-        switch (column){
+    private int getColumn(char row) {
+        switch (row){
             case 'A':
             case 'a':
                 return 0;
@@ -50,7 +50,7 @@ public class Fields {
         return -1;
     }
 
-    private int getRow(int row) {
-        return 8 - row;
+    private int getRow(int column) {
+        return 8 - column;
     }
 }

@@ -73,9 +73,47 @@ public class Board {
     @Override
     public String toString() {
         return "Board{" +
-//                "fields=" + fields +
                 ", lineUp=" + lineUp +
                 ", beatenFigures=" + beatenFigures +
                 '}';
+    }
+
+    public List<Field> getSelectionForField(Field from){
+        Figure f = lineUp.get(from);
+        if(f != null){
+            return getSelectionForFigure(f, from);
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    private List<Field> getSelectionForFigure(Figure figure, Field from) {
+        if(figure.is(Figurine.PAWN, Color.WHITE)){
+            return getSelectionForWhitePawn(from);
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    private List<Field> getSelectionForWhitePawn(Field from) {
+        List<Field> fields = new ArrayList<>();
+
+        Field north = Field.northOf(from);
+        boolean isForwardFree = isFree(north);
+        if(isForwardFree){
+            fields.add(north);
+        }
+        if (from.row.equals("2") && isForwardFree){
+            Field northNorth = Field.northOf(north);
+            if(isFree(northNorth)){
+                fields.add(northNorth);
+            }
+        }
+        return fields;
+    }
+
+    private boolean isFree(Field f){
+        return !lineUp.containsKey(f);
+    }
+    private boolean isOccupied(Field f){
+        return lineUp.containsKey(f);
     }
 }

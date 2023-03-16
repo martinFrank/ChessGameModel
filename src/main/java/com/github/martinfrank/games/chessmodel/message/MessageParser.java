@@ -1,10 +1,12 @@
 package com.github.martinfrank.games.chessmodel.message;
 
 import com.github.martinfrank.games.chessmodel.message.creategame.FcCreateGameMessage;
+import com.github.martinfrank.games.chessmodel.message.disconnect.FsSubmitDisconnectMessage;
 import com.github.martinfrank.games.chessmodel.message.getgamecontent.FcGetGameContentMessage;
 import com.github.martinfrank.games.chessmodel.message.getgamecontent.FsDeclineGameContentMessage;
 import com.github.martinfrank.games.chessmodel.message.getgamecontent.FsSubmitGameContentMessage;
 import com.github.martinfrank.games.chessmodel.message.getopengames.FcGetOpenGamesMessage;
+import com.github.martinfrank.games.chessmodel.message.getopengames.FsDeclineOpenGamesMessage;
 import com.github.martinfrank.games.chessmodel.message.getopengames.FsSubmitOpenGamesMessage;
 import com.github.martinfrank.games.chessmodel.message.getparticipatinggames.FcGetParticipatingGamesMessage;
 import com.github.martinfrank.games.chessmodel.message.getparticipatinggames.FsDeclineParticipatingGamesMessage;
@@ -23,6 +25,8 @@ import com.github.martinfrank.games.chessmodel.message.joingame.FsDeclineJoinGam
 import com.github.martinfrank.games.chessmodel.message.selectColor.FcSelectColorMessage;
 import com.github.martinfrank.games.chessmodel.message.selectColor.FsDeclineSelectColorMessage;
 import com.github.martinfrank.games.chessmodel.message.selectColor.FsSubmitSelectColorMessage;
+import com.github.martinfrank.games.chessmodel.message.startgame.FsDeclineStartGameMessage;
+import com.github.martinfrank.games.chessmodel.message.startgame.FsSubmitStartGameMessage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
@@ -46,6 +50,7 @@ public class MessageParser {
             switch (message.msgType) {
                 case FC_LOGIN: return gson.fromJson(jsonStr, FcLoginMessage.class);
                 case FS_SUBMIT_LOGIN: return gson.fromJson(jsonStr, FsSubmitLoginMessage.class);
+                case FS_SUBMIT_DISCONNECT: return gson.fromJson(jsonStr, FsSubmitDisconnectMessage.class);
                 //FIXME decline?
 
                 case FC_GET_PARTICIPATING_GAMES: return gson.fromJson(jsonStr, FcGetParticipatingGamesMessage.class);
@@ -54,7 +59,7 @@ public class MessageParser {
 
                 case FC_GET_OPEN_GAMES: return gson.fromJson(jsonStr, FcGetOpenGamesMessage.class);
                 case FS_SUBMIT_OPEN_GAMES: return gson.fromJson(jsonStr, FsSubmitOpenGamesMessage.class);
-                //FIXME decline?
+                case FS_DECLINE_OPEN_GAMES: return gson.fromJson(jsonStr, FsDeclineOpenGamesMessage.class);
 
                 case FC_CREATE_GAME: return gson.fromJson(jsonStr, FcCreateGameMessage.class);
                 case FS_SUBMIT_CREATED_GAME: return gson.fromJson(jsonStr, FsSubmitCreatedGameMessage.class);
@@ -76,13 +81,9 @@ public class MessageParser {
                 case FS_DECLINE_GAME_CONTENT: return gson.fromJson(jsonStr, FsDeclineGameContentMessage.class);
                 case FS_SUBMIT_GAME_CONTENT: return gson.fromJson(jsonStr, FsSubmitGameContentMessage.class);
 
-                //open stuff
                 case FC_START_GAME: return gson.fromJson(jsonStr, FcStartGameMessage.class);
-
-                //FIXME unrequired class
-                case FS_SUBMIT_UPDATE_GAME: return gson.fromJson(jsonStr, FsSubmitUpdateGameMessage.class);
-
-
+                case FS_SUBMIT_START_GAME: return gson.fromJson(jsonStr, FsSubmitStartGameMessage.class);
+                case FS_DECLINE_START_GAME: return gson.fromJson(jsonStr, FsDeclineStartGameMessage.class);
 
             }
         } catch (JsonParseException e) {

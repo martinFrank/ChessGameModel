@@ -11,19 +11,13 @@ import java.util.List;
 
 public class FsSubmitSelectFieldMessage extends Message {
 
+    public final Game game;
     public final GameContent gameContent;
 
-    public FsSubmitSelectFieldMessage(GameContent gameContent) {
+    public FsSubmitSelectFieldMessage(Game game, GameContent gameContent) {
         super(MessageType.FS_SUBMIT_SELECT_FIELD);
+        this.game = game;
         this.gameContent = gameContent;
     }
 
-    @Override
-    public String toString() {
-        return "FsSubmitSelectFieldMessage{" +
-                "gameContent=" + gameContent +
-                ", msgType=" + msgType +
-                ", version=" + version +
-                '}';
-    }
 }

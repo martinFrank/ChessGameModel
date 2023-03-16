@@ -8,10 +8,12 @@ import com.github.martinfrank.games.chessmodel.model.GameContent;
 public class FsSubmitStartGameMessage extends Message {
 
     public final Game game;
+    public final GameContent content;
 
-    public FsSubmitStartGameMessage(Game game) {
+    public FsSubmitStartGameMessage(Game game, GameContent content) {
         super(MessageType.FS_SUBMIT_START_GAME);
         this.game = game;
+        this.content = content;
     }
 
     @Override
