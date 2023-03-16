@@ -1,7 +1,8 @@
 package com.github.martinfrank.games.chessmodel.model.chess;
 
+import com.github.martinfrank.games.chessmodel.model.Player;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +67,10 @@ public class Board {
         return fields.getField(row.charAt(0), Integer.parseInt(column));
     }
     public Figure findFigure(Field field) {
-        return lineUp.get(field);
+        if(lineUp.containsKey(field)){
+            return lineUp.get(field);
+        }
+        return null;
     }
 
 
@@ -83,37 +87,73 @@ public class Board {
         if(f != null){
             return getSelectionForFigure(f, from);
         }
-        return Collections.EMPTY_LIST;
+        return new ArrayList<>();
     }
 
     private List<Field> getSelectionForFigure(Figure figure, Field from) {
         if(figure.is(Figurine.PAWN, Color.WHITE)){
             return getSelectionForWhitePawn(from);
         }
-        return Collections.EMPTY_LIST;
+        if(figure.is(Figurine.PAWN, Color.BLACK)){
+            return getSelectionForBlackPawn(from);
+        }
+        return new ArrayList<>();
     }
 
     private List<Field> getSelectionForWhitePawn(Field from) {
         List<Field> fields = new ArrayList<>();
 
         Field north = Field.northOf(from);
-        boolean isForwardFree = isFree(north);
-        if(isForwardFree){
-            fields.add(north);
+        if(north == null){
+            return new ArrayList<>();
         }
-        if (from.row.equals("2") && isForwardFree){
+        boolean isForwardFree = isFree(north);
+        fields.add(north);
+        if(!isForwardFree){
+            return fields;
+        }
+        if (from.row.equals("2") ){
             Field northNorth = Field.northOf(north);
-            if(isFree(northNorth)){
-                fields.add(northNorth);
-            }
+            fields.add(northNorth);
         }
         return fields;
     }
+
+    private List<Field> getSelectionForBlackPawn(Field from) {
+        List<Field> fields = new ArrayList<>();
+
+        Field south = Field.southOf(from);
+        if(south == null){
+            return new ArrayList<>();
+        }
+        boolean isForwardFree = isFree(south);
+        fields.add(south);
+        if(!isForwardFree){
+            return fields;
+        }
+        if (from.row.equals("7") ){
+            Field southOfSouth = Field.southOf(south);
+            fields.add(southOfSouth);
+        }
+        return fields;
+    }
+
 
     private boolean isFree(Field f){
         return !lineUp.containsKey(f);
     }
     private boolean isOccupied(Field f){
         return lineUp.containsKey(f);
+    }
+
+    public void moveFigure(Field from, Field to) {
+        Figure beaten = lineUp.get(to);
+        if (beaten != null){
+            beatenFigures.add(beaten);
+        }
+        Figure moved = lineUp.get(from);
+        lineUp.remove(from);
+        lineUp.put(to, moved);
+
     }
 }

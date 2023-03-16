@@ -3,6 +3,8 @@ package com.github.martinfrank.games.chessmodel.model;
 
 import com.github.martinfrank.games.chessmodel.model.chess.Board;
 import com.github.martinfrank.games.chessmodel.model.chess.Color;
+import com.github.martinfrank.games.chessmodel.model.chess.Field;
+import com.github.martinfrank.games.chessmodel.model.chess.Figure;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -14,7 +16,8 @@ public class Game {
     public final Player hostPlayer;
     private Player guestPlayer;
 
-    public transient GameContent gameContent;
+//    public transient GameContent gameContent;
+    public GameContent gameContent;
     //private List<Move> moveHistory;
 
     public Game(UUID gameId, Player hostPlayer) {
@@ -79,4 +82,6 @@ public class Game {
     public boolean isGuest(Player player) {
         return guestPlayer != null && guestPlayer.equals(player);
     }
+
+
 }

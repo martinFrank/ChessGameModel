@@ -2,21 +2,22 @@ package com.github.martinfrank.games.chessmodel.message.getgamecontent;
 
 import com.github.martinfrank.games.chessmodel.message.Message;
 import com.github.martinfrank.games.chessmodel.message.MessageType;
+import com.github.martinfrank.games.chessmodel.model.Game;
 import com.github.martinfrank.games.chessmodel.model.GameContent;
 
 public class FsSubmitGameContentMessage extends Message {
 
-    public final GameContent content;
+    public final Game game;
 
-    public FsSubmitGameContentMessage(GameContent content) {
+    public FsSubmitGameContentMessage(Game game) {
         super(MessageType.FS_SUBMIT_GAME_CONTENT);
-        this.content = content;
+        this.game = game;
     }
 
     @Override
     public String toString() {
         return "FsSubmitGameContentMessage{" +
-                "content=" + content +
+                "game=" + game +
                 ", msgType=" + msgType +
                 ", version=" + version +
                 '}';

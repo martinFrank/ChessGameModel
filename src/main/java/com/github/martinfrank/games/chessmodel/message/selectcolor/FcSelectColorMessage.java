@@ -1,4 +1,4 @@
-package com.github.martinfrank.games.chessmodel.message.selectColor;
+package com.github.martinfrank.games.chessmodel.message.selectcolor;
 
 import com.github.martinfrank.games.chessmodel.message.Message;
 import com.github.martinfrank.games.chessmodel.message.MessageType;

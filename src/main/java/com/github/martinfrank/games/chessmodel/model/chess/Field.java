@@ -12,9 +12,31 @@ public class Field {
         this.column = column;
     }
 
+    public static Field westOf(Field from) {
+        int col = mapFromColumn(from.column);
+        return new Field(from.row, mapToColumn(col + 1));
+    }
+
     public static Field northOf(Field from) {
-        int y = mapFromRow(from.row);
-        return new Field(from.column, mapToRow(y+1));
+        int row = mapFromRow(from.row);
+        String northRow;
+        try{
+            northRow = mapToRow(row+1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return new Field(northRow, from.column);
+    }
+
+    public static Field southOf(Field from) {
+        int row = mapFromRow(from.row);
+        String southRow;
+        try{
+            southRow = mapToRow(row-1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return new Field(southRow, from.column);
     }
 
     public static int mapFromRow(String row) {
@@ -44,6 +66,9 @@ public class Field {
         }
         throw new IllegalArgumentException("not a valid (A-H) column: "+column);
     }
+
+
+
 
     @Override
     public String toString() {

@@ -13,6 +13,9 @@ import com.github.martinfrank.games.chessmodel.message.getparticipatinggames.FsD
 import com.github.martinfrank.games.chessmodel.message.getparticipatinggames.FsSubmitParticipatingGamesMessage;
 import com.github.martinfrank.games.chessmodel.message.login.FcLoginMessage;
 import com.github.martinfrank.games.chessmodel.message.login.FsSubmitLoginMessage;
+import com.github.martinfrank.games.chessmodel.message.movefigure.FcMoveFigureMessage;
+import com.github.martinfrank.games.chessmodel.message.movefigure.FsDeclineMoveFigureMessage;
+import com.github.martinfrank.games.chessmodel.message.movefigure.FsSubmitMoveFigureMessage;
 import com.github.martinfrank.games.chessmodel.message.selectfield.FcSelectFieldMessage;
 import com.github.martinfrank.games.chessmodel.message.selectfield.FsDeclineSelectFieldMessage;
 import com.github.martinfrank.games.chessmodel.message.selectfield.FsSubmitSelectFieldMessage;
@@ -22,9 +25,9 @@ import com.github.martinfrank.games.chessmodel.message.creategame.FsSubmitCreate
 import com.github.martinfrank.games.chessmodel.message.joingame.FcJoinGameMessage;
 import com.github.martinfrank.games.chessmodel.message.joingame.FsConfirmJoinGamesMessage;
 import com.github.martinfrank.games.chessmodel.message.joingame.FsDeclineJoinGameMessage;
-import com.github.martinfrank.games.chessmodel.message.selectColor.FcSelectColorMessage;
-import com.github.martinfrank.games.chessmodel.message.selectColor.FsDeclineSelectColorMessage;
-import com.github.martinfrank.games.chessmodel.message.selectColor.FsSubmitSelectColorMessage;
+import com.github.martinfrank.games.chessmodel.message.selectcolor.FcSelectColorMessage;
+import com.github.martinfrank.games.chessmodel.message.selectcolor.FsDeclineSelectColorMessage;
+import com.github.martinfrank.games.chessmodel.message.selectcolor.FsSubmitSelectColorMessage;
 import com.github.martinfrank.games.chessmodel.message.startgame.FsDeclineStartGameMessage;
 import com.github.martinfrank.games.chessmodel.message.startgame.FsSubmitStartGameMessage;
 import com.google.gson.Gson;
@@ -84,6 +87,10 @@ public class MessageParser {
                 case FC_START_GAME: return gson.fromJson(jsonStr, FcStartGameMessage.class);
                 case FS_SUBMIT_START_GAME: return gson.fromJson(jsonStr, FsSubmitStartGameMessage.class);
                 case FS_DECLINE_START_GAME: return gson.fromJson(jsonStr, FsDeclineStartGameMessage.class);
+
+                case FC_MOVE_FIGURE: return gson.fromJson(jsonStr, FcMoveFigureMessage.class);
+                case FS_SUBMIT_MOVE_FIGURE: return gson.fromJson(jsonStr, FsSubmitMoveFigureMessage.class);
+                case FS_DECLINE_MOVE_FIGURE: return gson.fromJson(jsonStr, FsDeclineMoveFigureMessage.class);
 
             }
         } catch (JsonParseException e) {

@@ -25,6 +25,10 @@ public class Figure {
     }
 
     public boolean is(Figurine type, Color color) {
-        return this.type == type && this.color == color;
+        return this.type == type && isColor(color);
+    }
+
+    public boolean isColor( Color color){
+        return this.color == color;
     }
 }

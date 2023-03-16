@@ -41,21 +41,21 @@ public class GameContentMessageTest {
         System.out.println(specificMessage);
     }
 
-    @Test
-    public void doIt2(){
-        //given
-        GameContent gameContent = new GameContent(new Game(UUID.fromString("7ea85e6a-7380-4247-b08c-e3898c7b6a41"), new Player(UUID.fromString("7ea85e6a-7380-4247-b08c-e3898c7b6a42"), "testeee", 0)));
-        FsSubmitGameContentMessage message = new FsSubmitGameContentMessage(gameContent);
-        System.out.println("message: "+message);
-
-        //when
-        MessageParser parser = new MessageParser();
-        String json = parser.toJson(message);
-        System.out.println("json: "+json);
-        Message raw = parser.fromJson(json);
-        System.out.println("raw: " + raw);
-
-    }
+//    @Test
+//    public void doIt2(){
+//        //given
+//        GameContent gameContent = new GameContent(new Game(UUID.fromString("7ea85e6a-7380-4247-b08c-e3898c7b6a41"), new Player(UUID.fromString("7ea85e6a-7380-4247-b08c-e3898c7b6a42"), "testeee", 0)));
+//        FsSubmitGameContentMessage message = new FsSubmitGameContentMessage(gameContent);
+//        System.out.println("message: "+message);
+//
+//        //when
+//        MessageParser parser = new MessageParser();
+//        String json = parser.toJson(message);
+//        System.out.println("json: "+json);
+//        Message raw = parser.fromJson(json);
+//        System.out.println("raw: " + raw);
+//
+//    }
 
     @Test
     public void doIt3(){

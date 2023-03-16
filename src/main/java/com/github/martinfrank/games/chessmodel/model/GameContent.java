@@ -3,6 +3,7 @@ package com.github.martinfrank.games.chessmodel.model;
 import com.github.martinfrank.games.chessmodel.model.chess.Board;
 import com.github.martinfrank.games.chessmodel.model.chess.Color;
 import com.github.martinfrank.games.chessmodel.model.chess.Field;
+import com.github.martinfrank.games.chessmodel.model.chess.Figure;
 
 public class GameContent {
 
@@ -23,14 +24,40 @@ public class GameContent {
 
     public Board board;
 
-    private transient final Game container;
+    private transient Game container;
 
     public GameContent (Game container){
-        this.container = container; //string coupling
+        this.container = container; //strong coupling
         board = new Board();
     }
 
+    public boolean isValidMove(Field from, Field to, Player player){
+        if(from == null){
+            return false;
+        }
+        if(to == null){
+            return false;
+        }
+        if(player == null){
+            return false;
+        }
+        if(from.equals(to)){
+            return false;
+        }
+        if (!board.getSelectionForField(from).contains(to)){
+            return false;
+        }
+        Figure figure = board.findFigure(from);
+        Color myColor = getColor(player);
+        boolean isMyFigure = figure != null && figure.isColor(myColor);
+        boolean isMyTurn = getCurrentPlayer() != null && player.equals(getCurrentPlayer());
+        return (isMyFigure && isMyTurn);
 
+    }
+
+    public void setContainer(Game container){
+        this.container = container; //strong coupling
+    }
 
     public boolean isHostOnline() {
         return isHostOnline;
@@ -113,6 +140,16 @@ public class GameContent {
         hostSelection = field;
     }
 
+    public Color getColor(Player player){
+        if (container.hostPlayer.equals(player) ){
+            return hostColor;
+        }
+        if(container.getGuestPlayer() != null && container.getGuestPlayer().equals(player)){
+            return guestColor;
+        }
+        throw new IllegalStateException("player color is not defined yet");
+    }
+
     public void selectGuestField(Field field) {
         if(guestSelection != null && guestSelection.equals(field)){
             guestSelection = null;
@@ -137,5 +174,8 @@ public class GameContent {
     }
 
 
-
+    public void moveFigure(Field from, Field to) {
+        board.moveFigure(from, to);
+        currentPlayer = container.getOther(currentPlayer);
+    }
 }
