@@ -1,6 +1,12 @@
 package com.github.martinfrank.games.chessmodel.model.chess;
 
-import com.github.martinfrank.games.chessmodel.model.Player;
+import com.github.martinfrank.games.chessmodel.model.chess.selection.BishopSelection;
+import com.github.martinfrank.games.chessmodel.model.chess.selection.BlackPawnSelection;
+import com.github.martinfrank.games.chessmodel.model.chess.selection.KingSelection;
+import com.github.martinfrank.games.chessmodel.model.chess.selection.KnightSelection;
+import com.github.martinfrank.games.chessmodel.model.chess.selection.QueenSelection;
+import com.github.martinfrank.games.chessmodel.model.chess.selection.RookSelection;
+import com.github.martinfrank.games.chessmodel.model.chess.selection.WhitePawnSelection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +18,7 @@ public class Board {
     private final transient Fields fields = new Fields();
     public final Map<Field, Figure> lineUp = new HashMap<>();
     public final List<Figure> beatenFigures = new ArrayList<>();
+
 
     public Board(){
         lineUpFigureAt(Figurine.ROOK, Color.WHITE, 'A', 1);
@@ -91,59 +98,47 @@ public class Board {
     }
 
     private List<Field> getSelectionForFigure(Figure figure, Field from) {
+
         if(figure.is(Figurine.PAWN, Color.WHITE)){
-            return getSelectionForWhitePawn(from);
+            return WhitePawnSelection.getSelection(from, this);
         }
         if(figure.is(Figurine.PAWN, Color.BLACK)){
-            return getSelectionForBlackPawn(from);
+            return BlackPawnSelection.getSelection(from, this);
+        }
+        if(figure.is(Figurine.KNIGHT, Color.WHITE) || figure.is(Figurine.KNIGHT, Color.BLACK)  ){
+            return KnightSelection.getSelection(from, this, figure.color);
+        }
+        if(figure.is(Figurine.BISHOP, Color.WHITE) || figure.is(Figurine.BISHOP, Color.BLACK)  ){
+            return BishopSelection.getSelection(from, this, figure.color);
+        }
+        if(figure.is(Figurine.ROOK, Color.WHITE) || figure.is(Figurine.ROOK, Color.BLACK)  ){
+            return RookSelection.getSelection(from, this, figure.color);
+        }
+        if(figure.is(Figurine.QUEEN, Color.WHITE) || figure.is(Figurine.QUEEN, Color.BLACK)  ){
+            return QueenSelection.getSelection(from, this, figure.color);
+        }
+        if(figure.is(Figurine.KING, Color.WHITE) || figure.is(Figurine.KING, Color.BLACK)  ){
+            return KingSelection.getSelection(from, this, figure.color);
         }
         return new ArrayList<>();
     }
 
-    private List<Field> getSelectionForWhitePawn(Field from) {
-        List<Field> fields = new ArrayList<>();
 
-        Field north = Field.northOf(from);
-        if(north == null){
-            return new ArrayList<>();
-        }
-        boolean isForwardFree = isFree(north);
-        fields.add(north);
-        if(!isForwardFree){
-            return fields;
-        }
-        if (from.row.equals("2") ){
-            Field northNorth = Field.northOf(north);
-            fields.add(northNorth);
-        }
-        return fields;
-    }
-
-    private List<Field> getSelectionForBlackPawn(Field from) {
-        List<Field> fields = new ArrayList<>();
-
-        Field south = Field.southOf(from);
-        if(south == null){
-            return new ArrayList<>();
-        }
-        boolean isForwardFree = isFree(south);
-        fields.add(south);
-        if(!isForwardFree){
-            return fields;
-        }
-        if (from.row.equals("7") ){
-            Field southOfSouth = Field.southOf(south);
-            fields.add(southOfSouth);
-        }
-        return fields;
-    }
-
-
-    private boolean isFree(Field f){
+    public boolean isFree(Field f){
         return !lineUp.containsKey(f);
     }
-    private boolean isOccupied(Field f){
+    public boolean isOccupied(Field f){
         return lineUp.containsKey(f);
+    }
+
+    public boolean isOccupiedFriendly(Field f, Color color){
+        Figure figure = lineUp.get(f);
+        return figure != null && figure.isColor(color);
+    }
+
+    public boolean isOccupiedEnemy(Field f, Color color){
+        Figure figure = lineUp.get(f);
+        return figure != null && !figure.isColor(color);
     }
 
     public void moveFigure(Field from, Field to) {

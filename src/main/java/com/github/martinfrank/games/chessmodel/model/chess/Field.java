@@ -12,9 +12,26 @@ public class Field {
         this.column = column;
     }
 
-    public static Field westOf(Field from) {
+
+
+
+
+    public static Field northWestOf(Field from) {
+        int row = mapFromRow(from.row);
         int col = mapFromColumn(from.column);
-        return new Field(from.row, mapToColumn(col + 1));
+        String northRow;
+        try{
+            northRow = mapToRow(row+1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        String westColumn;
+        try{
+            westColumn = mapToColumn(col-1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return new Field(northRow, westColumn);
     }
 
     public static Field northOf(Field from) {
@@ -28,6 +45,52 @@ public class Field {
         return new Field(northRow, from.column);
     }
 
+    public static Field northEastOf(Field from) {
+        int row = mapFromRow(from.row);
+        int col = mapFromColumn(from.column);
+        String northRow;
+        try{
+            northRow = mapToRow(row+1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        String eastRow;
+        try{
+            eastRow = mapToColumn(col+1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return new Field(northRow, eastRow);
+    }
+
+    public static Field eastOf(Field from) {
+        int col = mapFromColumn(from.column);
+        String eastCol;
+        try{
+            eastCol = mapToColumn(col + 1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return new Field(from.row, eastCol);
+    }
+
+    public static Field southEastOf(Field from) {
+        int row = mapFromRow(from.row);
+        int col = mapFromColumn(from.column);
+        String southRow;
+        try{
+            southRow = mapToRow(row-1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        String eastRow;
+        try{
+            eastRow = mapToColumn(col+1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return new Field(southRow, eastRow);
+    }
     public static Field southOf(Field from) {
         int row = mapFromRow(from.row);
         String southRow;
@@ -37,6 +100,35 @@ public class Field {
             return null;
         }
         return new Field(southRow, from.column);
+    }
+
+    public static Field southWestOf(Field from) {
+        int row = mapFromRow(from.row);
+        int col = mapFromColumn(from.column);
+        String southRow;
+        try{
+            southRow = mapToRow(row-1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        String westRow;
+        try{
+            westRow = mapToColumn(col-1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return new Field(southRow, westRow);
+    }
+
+    public static Field westOf(Field from) {
+        int col = mapFromColumn(from.column);
+        String westCol;
+        try{
+            westCol = mapToColumn(col - 1);
+        }catch (IllegalArgumentException e){
+            return null;
+        }
+        return new Field(from.row, westCol);
     }
 
     public static int mapFromRow(String row) {
