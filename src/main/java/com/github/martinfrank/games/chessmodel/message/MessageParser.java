@@ -1,6 +1,9 @@
 package com.github.martinfrank.games.chessmodel.message;
 
 import com.github.martinfrank.games.chessmodel.message.creategame.FcCreateGameMessage;
+import com.github.martinfrank.games.chessmodel.message.deletegame.FcDeleteGameMessage;
+import com.github.martinfrank.games.chessmodel.message.deletegame.FsDeclineDeleteGameMessage;
+import com.github.martinfrank.games.chessmodel.message.deletegame.FsSubmitDeleteGameMessage;
 import com.github.martinfrank.games.chessmodel.message.disconnect.FsSubmitDisconnectMessage;
 import com.github.martinfrank.games.chessmodel.message.getgamecontent.FcGetGameContentMessage;
 import com.github.martinfrank.games.chessmodel.message.getgamecontent.FsDeclineGameContentMessage;
@@ -77,7 +80,7 @@ public class MessageParser {
                 case FS_DECLINE_SELECT_FIELD: return gson.fromJson(jsonStr, FsDeclineSelectFieldMessage.class);
 
                 case FC_JOIN_GAME: return gson.fromJson(jsonStr, FcJoinGameMessage.class);
-                case FS_CONFIRM_JOIN_GAME: return gson.fromJson(jsonStr, FsConfirmJoinGamesMessage.class);
+                case FS_CONFIRM_JOIN_GAME: return gson.fromJson(jsonStr, FsConfirmJoinGamesMessage.class); //FIXME proper naming!
                 case FS_DECLINE_JOIN_GAME: return gson.fromJson(jsonStr, FsDeclineJoinGameMessage.class);
 
                 case FC_GET_GAME_CONTENT: return gson.fromJson(jsonStr, FcGetGameContentMessage.class);
@@ -91,6 +94,10 @@ public class MessageParser {
                 case FC_MOVE_FIGURE: return gson.fromJson(jsonStr, FcMoveFigureMessage.class);
                 case FS_SUBMIT_MOVE_FIGURE: return gson.fromJson(jsonStr, FsSubmitMoveFigureMessage.class);
                 case FS_DECLINE_MOVE_FIGURE: return gson.fromJson(jsonStr, FsDeclineMoveFigureMessage.class);
+
+                case FC_DELETE_GAME: return gson.fromJson(jsonStr, FcDeleteGameMessage.class);
+                case FS_SUBMIT_DELETE_GAME: return gson.fromJson(jsonStr, FsSubmitDeleteGameMessage.class);
+                case FS_DECLINE_DELETE_GAME: return gson.fromJson(jsonStr, FsDeclineDeleteGameMessage.class);
 
             }
         } catch (JsonParseException e) {

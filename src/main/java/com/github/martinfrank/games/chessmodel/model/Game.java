@@ -15,23 +15,26 @@ public class Game {
     public final UUID gameId;
     public final Player hostPlayer;
     private Player guestPlayer;
-
-//    public transient GameContent gameContent;
     public GameContent gameContent;
-    //private List<Move> moveHistory;
 
     public Game(UUID gameId, Player hostPlayer) {
         this.gameId = gameId;
         this.hostPlayer = hostPlayer;
-        gameContent = new GameContent(this); //string coupling
+        gameContent = new GameContent();
+        updateHostPlayer(hostPlayer);
     }
 
     public Player getGuestPlayer(){
         return guestPlayer;
     }
 
-    public void setGuestPlayer(Player guestPlayer) {
+    public void updateGuestPlayer(Player guestPlayer) {
         this.guestPlayer = guestPlayer;
+        gameContent.setGuest(guestPlayer);
+    }
+
+    public void updateHostPlayer(Player hostPlayer) {
+        gameContent.setHost(hostPlayer);
     }
 
 
@@ -65,14 +68,10 @@ public class Game {
     }
 
     public Player getOther(Player player){
-        Player other = null;
         if (hostPlayer.equals(player)){
-            other = guestPlayer;
+            return guestPlayer;
         }
-        if(guestPlayer != null && guestPlayer.equals(player)){
-            other = hostPlayer;
-        }
-        return other;
+        return hostPlayer;
     }
 
     public boolean isHost(Player player) {

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Board {
 
@@ -150,5 +151,42 @@ public class Board {
         lineUp.remove(from);
         lineUp.put(to, moved);
 
+    }
+
+    public boolean isCheck(Color color) {
+        Field kingsField = findKingsField(color);
+        List<Field> enemyOccupiedFields = filterLineUp(color.getOpposite());
+        for(Field enemyOccupiedField: enemyOccupiedFields){
+            List<Field> selection = getSelectionForField(enemyOccupiedField);
+            if(selection.contains(kingsField)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<Field> filterLineUp(Color color) {
+        return lineUp.entrySet().stream()
+                .filter(entry -> entry.getValue().isColor(color))
+                .map(entry -> entry.getKey())
+                .collect(Collectors.toList());
+    }
+
+    private Field findKingsField(Color color) {
+        for(Map.Entry<Field, Figure> entry: lineUp.entrySet()){
+            if(entry.getValue().is(Figurine.KING, color)){
+                return entry.getKey();
+            }
+        }
+        throw new IllegalStateException("there is no King with color:"+color+" in the line up");
+    }
+
+    public boolean willBeCheck(Field from, Field to, Color playersColor) {
+        Map<Field, Figure> lineUpCopy = new HashMap<>(lineUp);
+        moveFigure(from, to);
+        boolean isCheck = isCheck(playersColor);
+        lineUp.clear();
+        lineUp.putAll(lineUpCopy);
+        return isCheck;
     }
 }
