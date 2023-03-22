@@ -3,14 +3,14 @@ package com.github.martinfrank.games.chessmodel.message.startgame;
 import com.github.martinfrank.games.chessmodel.message.Message;
 import com.github.martinfrank.games.chessmodel.message.MessageType;
 import com.github.martinfrank.games.chessmodel.model.Game;
-import com.github.martinfrank.games.chessmodel.model.GameContent;
+import com.github.martinfrank.games.chessmodel.model.chess.ChessGame;
 
 public class FsSubmitStartGameMessage extends Message {
 
     public final Game game;
-    public final GameContent content;
+    public final ChessGame content;
 
-    public FsSubmitStartGameMessage(Game game, GameContent content) {
+    public FsSubmitStartGameMessage(Game game, ChessGame content) {
         super(MessageType.FS_SUBMIT_START_GAME);
         this.game = game;
         this.content = content;

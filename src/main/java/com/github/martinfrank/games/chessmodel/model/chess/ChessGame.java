@@ -1,13 +1,12 @@
-package com.github.martinfrank.games.chessmodel.model;
+package com.github.martinfrank.games.chessmodel.model.chess;
 
-import com.github.martinfrank.games.chessmodel.model.chess.Board;
-import com.github.martinfrank.games.chessmodel.model.chess.Color;
-import com.github.martinfrank.games.chessmodel.model.chess.Field;
-import com.github.martinfrank.games.chessmodel.model.chess.Figure;
-import com.github.martinfrank.games.chessmodel.model.chess.Participant;
+import com.github.martinfrank.games.chessmodel.model.Player;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class GameContent {
+public class ChessGame {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ChessGame.class);
 
     private boolean isStarted;
     private Participant host;
@@ -18,26 +17,33 @@ public class GameContent {
     private long startTime = -1;
     public Board board;
 
-    public GameContent (){
+    public ChessGame(){
         board = new Board();
     }
 
     public boolean isValidMove(Field from, Field to, Player player){
+        LOGGER.debug("isValidMove?");
         if(!hasValidMoveParameter(from, to, player) ){
+            LOGGER.debug("no - invalid Parameter");
             return false;
         }
         if(!isMyMove(from, player)){
+            LOGGER.debug("no - is not MY move");
             return false;
         }
 
         boolean willBeCheck = board.willBeCheck(from, to, getThisParticipant(player).color);
+        LOGGER.debug("willBeCheck="+willBeCheck);
         return !willBeCheck;
     }
 
     private boolean isMyMove(Field from, Player player) {
         Figure figure = board.findFigure(from);
         Color myColor = getThisParticipant(player).color;
+        LOGGER.debug("isMyMove.myColor="+myColor);
         boolean isMyFigure = figure != null && figure.isColor(myColor);
+        LOGGER.debug("current.player.id="+current.player.playerId);
+        LOGGER.debug("        player.id="+player.playerId);
         boolean isMyTurn = current.player.equals(player);
         return (isMyFigure && isMyTurn);
     }
@@ -123,12 +129,20 @@ public class GameContent {
     }
 
     public void setHost(Player hostPlayer) {
-        host = new Participant(hostPlayer);
+        if(host == null){
+            host = new Participant(hostPlayer);
+        }else{
+            host.updatePlayer(hostPlayer);
+        }
         host.color = Color.WHITE;
     }
 
     public void setGuest(Player guestPlayer) {
-        guest = new Participant(guestPlayer);
-        guest.color = Color.BLACK;
+        if(guest == null){
+            guest = new Participant(guestPlayer);
+        }else{
+            guest.updatePlayer(guestPlayer);
+        }
+        guest.color = host.color.getOpposite();
     }
 }

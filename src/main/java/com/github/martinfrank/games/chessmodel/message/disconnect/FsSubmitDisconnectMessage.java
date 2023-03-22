@@ -7,8 +7,8 @@ import com.github.martinfrank.games.chessmodel.model.Player;
 
 public class FsSubmitDisconnectMessage extends Message {
 
-    private final Player player;
-    private final Game game;
+    public final Player player;
+    public final Game game;
 
     public FsSubmitDisconnectMessage(Player player, Game game) {
         super(MessageType.FS_SUBMIT_DISCONNECT);

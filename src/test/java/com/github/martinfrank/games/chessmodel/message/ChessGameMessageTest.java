@@ -1,9 +1,6 @@
 package com.github.martinfrank.games.chessmodel.message;
 
 import com.github.martinfrank.games.chessmodel.message.getgamecontent.FsSubmitGameContentMessage;
-import com.github.martinfrank.games.chessmodel.model.Game;
-import com.github.martinfrank.games.chessmodel.model.GameContent;
-import com.github.martinfrank.games.chessmodel.model.Player;
 import com.github.martinfrank.games.chessmodel.model.chess.Color;
 import com.github.martinfrank.games.chessmodel.model.chess.Field;
 import com.github.martinfrank.games.chessmodel.model.chess.Figure;
@@ -14,9 +11,8 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-public class GameContentMessageTest {
+public class ChessGameMessageTest {
 
     @Test
     public void doIt(){

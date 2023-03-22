@@ -1,10 +1,7 @@
 package com.github.martinfrank.games.chessmodel.model;
 
 
-import com.github.martinfrank.games.chessmodel.model.chess.Board;
-import com.github.martinfrank.games.chessmodel.model.chess.Color;
-import com.github.martinfrank.games.chessmodel.model.chess.Field;
-import com.github.martinfrank.games.chessmodel.model.chess.Figure;
+import com.github.martinfrank.games.chessmodel.model.chess.ChessGame;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -13,15 +10,18 @@ import java.util.UUID;
 public class Game {
 
     public final UUID gameId;
-    public final Player hostPlayer;
+    private Player hostPlayer;
     private Player guestPlayer;
-    public GameContent gameContent;
+    public ChessGame chessGame;
 
     public Game(UUID gameId, Player hostPlayer) {
         this.gameId = gameId;
-        this.hostPlayer = hostPlayer;
-        gameContent = new GameContent();
+        chessGame = new ChessGame();
         updateHostPlayer(hostPlayer);
+    }
+
+    public Player getHostPlayer(){
+        return hostPlayer;
     }
 
     public Player getGuestPlayer(){
@@ -30,11 +30,12 @@ public class Game {
 
     public void updateGuestPlayer(Player guestPlayer) {
         this.guestPlayer = guestPlayer;
-        gameContent.setGuest(guestPlayer);
+        chessGame.setGuest(guestPlayer);
     }
 
     public void updateHostPlayer(Player hostPlayer) {
-        gameContent.setHost(hostPlayer);
+        this.hostPlayer = hostPlayer;
+        chessGame.setHost(hostPlayer);
     }
 
 
